@@ -14,14 +14,14 @@ func getArrSize(msg string) (int, error) {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print(msg)
 	input, err := reader.ReadString('\n')
-	input = strings.TrimSpace(input)
 	if err != nil {
 		return -1, err
 	}
+	input = strings.TrimSpace(input)
 
 	size, err := strconv.Atoi(input)
 	if err != nil {
-		return -1, ErrWrongArrSize
+		return -1, fmt.Errorf("%w: %w", ErrWrongArrSize, err)
 	}
 
 	if size < 0 {
